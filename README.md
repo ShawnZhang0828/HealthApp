@@ -1,2 +1,2 @@
 # HealthApp
- An health app constructed for 2022 Google Design Challenge
+ An HealthApp built for the 2022 
