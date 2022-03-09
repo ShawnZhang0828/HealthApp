@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'dashboard.dart';
 class LoginPage extends StatefulWidget {
   @override
@@ -64,6 +65,19 @@ class _LoginPageState extends State<LoginPage> {
         child: Text('Forgot Password', style: TextStyle(color: Colors.grey, fontSize: 16),),
         onPressed: null
     );
+    final buttonSigninGoogle = FloatingActionButton.extended(
+        onPressed: () {
+          GoogleSignIn().signIn();
+        },
+        label: Text('Sign in with Google', style: TextStyle(fontSize: 20)),
+        icon: Image.asset(
+            'assets/images/Google-icon.png',
+            height: 32,
+            width: 32,
+        ),
+        backgroundColor: Colors.lightGreen,
+        foregroundColor: Colors.white,
+      );
     return SafeArea(
         child: Scaffold(
           body: Center(
@@ -75,7 +89,8 @@ class _LoginPageState extends State<LoginPage> {
                 inputEmail,
                 inputPassword,
                 buttonLogin,
-                buttonForgotPassword
+                buttonSigninGoogle,
+                buttonForgotPassword,
               ],
             ),
           ),

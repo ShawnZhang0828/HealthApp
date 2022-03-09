@@ -30,6 +30,16 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Google Sign in
+  firebase_auth: ^1.1.4
+  google_sign_in: ^5.0.3
+
+  # Google Icon
+  font_awesome_flutter: ^9.0.0
+
+  # State Management
+  provider: ^5.0.0
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -87,3 +97,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - assets/images/
+
