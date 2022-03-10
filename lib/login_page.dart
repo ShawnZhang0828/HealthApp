@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'dashboard.dart';
+import 'package:health_app/sign_up.dart';
+import 'sign_up.dart';
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -78,6 +79,12 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.lightGreen,
         foregroundColor: Colors.white,
       );
+    final buttonSignUp = FlatButton(
+        child: Text('SignUp', style: TextStyle(color: Colors.grey, fontSize: 16),),
+      onPressed: () => {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage()))
+      },
+    );
     return SafeArea(
         child: Scaffold(
           body: Center(
@@ -89,8 +96,12 @@ class _LoginPageState extends State<LoginPage> {
                 inputEmail,
                 inputPassword,
                 buttonLogin,
+                SizedBox(
+                  height: 10,
+                ),
                 buttonSigninGoogle,
                 buttonForgotPassword,
+                buttonSignUp,
               ],
             ),
           ),
