@@ -22,8 +22,18 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'      // added
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+dependencies {
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+
+
+    // Add the dependencies for the desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+}
 
 android {
     compileSdkVersion flutter.compileSdkVersion
@@ -54,3 +64,5 @@ android {
 flutter {
     source '../..'
 }
+
+
