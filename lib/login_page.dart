@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:health_app/sign_up.dart';
+import 'main_page.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -56,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(50)
           ),
           onPressed: () => {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()))
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()))
           },
         ),
       ),
