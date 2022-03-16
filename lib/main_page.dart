@@ -3,6 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:health_app/ingrediant_input_page.dart';
 import 'package:health_app/login_page.dart';
 import 'dashboard.dart';
+import 'camera_main.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -29,7 +30,9 @@ class _MainPageState extends State<MainPage> {
         iconSize: 40,
     );
     final cameraButton = RawMaterialButton(
-        onPressed: () => {},
+      onPressed: () => {
+        camera_main(),
+      },
         child: Hero(
             tag: 'hero',
             child: CircleAvatar(
