@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:health_app/sign_up.dart';
@@ -7,9 +9,65 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
+
+class Authentication {
+  static Future<User?> signInWithGoogle({required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+
+    if (kIsWeb) {
+      GoogleAuthProvider authProvider = GoogleAuthProvider();
+
+      try {
+        final UserCredential userCredential =
+        await auth.signInWithPopup(authProvider);
+
+        user = userCredential.user;
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+
+      final GoogleSignInAccount? googleSignInAccount =
+      await googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        try {
+          final UserCredential userCredential =
+          await auth.signInWithCredential(credential);
+
+          user = userCredential.user;
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'account-exists-with-different-credential') {
+            // ...
+          } else if (e.code == 'invalid-credential') {
+            // ...
+          }
+        } catch (e) {
+          // ...
+        }
+      }
+    }
+
+    return user;
+  }
+}
+
 class _LoginPageState extends State<LoginPage> {
+  bool _isSigningIn = false;
+
   @override
   Widget build(BuildContext context) {
+    
     final logo = Padding(
       padding: EdgeInsets.all(20),
       child: Hero(
@@ -68,9 +126,22 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: null
     );
     final buttonSigninGoogle = FloatingActionButton.extended(
-        onPressed: () {
-          GoogleSignIn().signIn();
-        },
+      onPressed: () async {
+        setState(() {
+          _isSigningIn = true;
+        });
+
+        User? user =
+        await Authentication.signInWithGoogle(context: context);
+
+        setState(() {
+          _isSigningIn = false;
+        });
+
+        if (user != null) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
+        }
+      },
         label: Text('Sign in with Google', style: TextStyle(fontSize: 20)),
         icon: Image.asset(
             'assets/images/Google-icon.png',
