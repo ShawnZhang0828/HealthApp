@@ -31,15 +31,15 @@ dependencies:
     sdk: flutter
 
   # Google Sign in
-  firebase_auth: ^1.1.4
-  firebase_core : ^0.5.0
+  firebase_auth: ^3.3.11
+  firebase_core : ^1.13.1
   google_sign_in: ^5.0.3
 
   # Google Icon
   font_awesome_flutter: ^9.0.0
 
   # State Management
-  provider: ^5.0.0
+  provider: ^6.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -48,6 +48,11 @@ dependencies:
   material_tag_editor: ^0.1.2
   textfield_tags: ^1.4.4
   flutter_tags: ^0.4.9+1
+
+  # Web Scraping
+  web_scraper: ^0.1.4
+  http: ^0.13.4
+  html: ^0.15.0
 
 dev_dependencies:
   flutter_test:
@@ -87,12 +92,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: LeagueSpartan
+      fonts:
+        - asset: assets/fonts/LeagueSpartan-VariableFont_wght.ttf
+    - family: JosefinSans
+      fonts:
+        - asset: assets/fonts/JosefinSans-VariableFont_wght.ttf
+          weight: 900
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
