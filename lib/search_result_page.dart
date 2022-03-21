@@ -67,8 +67,9 @@ class _SearchResultState extends State<SearchResultPage> {
                         // RecipeInfoDataPasser.result = SearchResult(recipeURL: AllRecipeReceiver.result.recipePageURLs[index]);
                         // print("========== printing from search result page ==========");
                         // print(RecipeInfoDataPasser.result.prepTime);
-                        RecipeURLReceiver.recipeURL = AllRecipeReceiver.result.recipePageURLs[index];
-                        RecipeURLReceiver().getBasicInfo();
+                        RecipePageInfoReceiver.recipeURL = AllRecipeReceiver.result.recipePageURLs[index];
+                        RecipePageInfoReceiver().getBasicInfo();
+                        RecipePageInfoReceiver().getIngredients();
                         await Future.delayed(const Duration(seconds: 2));
                         Navigator.push(
                           context,

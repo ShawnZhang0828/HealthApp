@@ -120,6 +120,23 @@ class WebScraper{
     }
   }
 
+  extractIngredients(String RecipeURL) async {
+    final response = await http.Client().get(Uri.parse(RecipeURL));
 
+    if (response.statusCode == 200) {
+      var document = parser.parse(response.body);
+      try {
+        var ingredientList = document.getElementsByClassName("ingredients-item-name elementFont__body");
+        List<String> ingredients = [];
+        for (int i = 0; i < ingredientList.length; i++) {
+          ingredients.add(ingredientList[i].text.trim());
+        }
+        return ingredients;
+      } catch (e) {
+        print(e);
+        return [];
+      }
+    }
+  }
 
 }
