@@ -3,6 +3,7 @@ import 'package:health_app/search_result_page.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 import 'BackendService/WebSraper.dart';
+import 'main_page.dart';
 
 List<String> tagsList = ['watermelon', 'apple', 'pork', 'meat', 'banana', 'cucumber', 'tomato', 'potato', 'butter', 'egg', 'garlic', 'onion', 'tofu'];
 List<String> selectedTags = [];
@@ -27,6 +28,16 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Enter Ingredients'),
+        backgroundColor: const Color(0xff71c1aa),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage())),
+          },
+        ),
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
@@ -37,6 +48,9 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
             Align(
               alignment: Alignment.topRight,
               child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(const Color(0xff8ca875)),
+                ),
                 onPressed: () async {
                   AllRecipeDataPasser.result = SearchResult();
                   // print("========== printing from ingredient input page ==========");

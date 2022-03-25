@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     
     final logo = Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Hero(
           tag: 'hero',
           child: CircleAvatar(
@@ -79,12 +79,12 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
     final inputEmail = Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
             hintText: 'Email',
-            contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             )
@@ -92,13 +92,13 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
     final inputPassword = Padding(
-      padding: EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 20),
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         obscureText: true,
         decoration: InputDecoration(
             hintText: 'Password',
-            contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             )
@@ -106,11 +106,11 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
     final buttonLogin = Padding(
-      padding: EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.only(bottom: 5),
       child: ButtonTheme(
         height: 56,
         child: RaisedButton(
-          child: Text('Login', style: TextStyle(color: Colors.white, fontSize: 20)),
+          child: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 20)),
           color: Colors.lightGreen,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50)

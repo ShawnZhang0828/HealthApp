@@ -30,7 +30,7 @@ class _SearchResultState extends State<SearchResultPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Search Results"),
-        backgroundColor: const Color(0xff81ada0),
+        backgroundColor: const Color(0xff71c1aa),
       ),
       body: Container(
         color: const Color.fromRGBO(207, 202, 209, 100),
