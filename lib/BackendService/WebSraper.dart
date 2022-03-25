@@ -120,8 +120,8 @@ class WebScraper{
     }
   }
 
-  extractIngredients(String RecipeURL) async {
-    final response = await http.Client().get(Uri.parse(RecipeURL));
+  extractIngredients(String recipeURL) async {
+    final response = await http.Client().get(Uri.parse(recipeURL));
 
     if (response.statusCode == 200) {
       var document = parser.parse(response.body);
@@ -132,6 +132,44 @@ class WebScraper{
           ingredients.add(ingredientList[i].text.trim());
         }
         return ingredients;
+      } catch (e) {
+        print(e);
+        return [];
+      }
+    }
+  }
+
+  extractDirections(String recipeURL) async {
+    final response = await http.Client().get(Uri.parse(recipeURL));
+
+    if (response.statusCode == 200) {
+      var document = parser.parse(response.body);
+      try {
+        var directionList = document.getElementsByClassName("section-body elementFont__body--paragraphWithin elementFont__body--linkWithin");
+        List<String> directions = [];
+        for (int i = 0; i < directionList.length; i++) {
+          directions.add(directionList[i].children[0].children[0].text.trim());
+        }
+        return directions;
+      } catch (e) {
+        print(e);
+        return [];
+      }
+    }
+  }
+
+  extractNutritionFact(String recipeURL) async {
+    final response = await http.Client().get(Uri.parse(recipeURL));
+
+    if (response.statusCode == 200) {
+      var document = parser.parse(response.body);
+      try {
+        var nutritionFactList = document.getElementsByClassName("recipeNutritionSectionBlock");
+        List<String> nutritionFact = [];
+        for (int i = 0; i < nutritionFactList.length; i++) {
+          nutritionFact.add(nutritionFactList[i].children[1].text.trim());
+        }
+        return nutritionFact;
       } catch (e) {
         print(e);
         return [];

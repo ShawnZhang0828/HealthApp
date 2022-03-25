@@ -36,7 +36,7 @@ dependencies:
   google_sign_in: ^5.2.4
 
   # Google Icon
-  font_awesome_flutter: ^9.2.0
+  font_awesome_flutter: ^10.1.0
 
   # State Management
   provider: ^6.0.2
@@ -53,6 +53,9 @@ dependencies:
   web_scraper: ^0.1.4
   http: ^0.13.4
   html: ^0.15.0
+
+  # Web launcher:
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:
