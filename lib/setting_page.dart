@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'BackendService/SetPreference.dart';
 import 'login_page.dart';
 import 'main_page.dart';
 
 class DropDownMenu extends StatefulWidget {
 
-  List<String> items = [];
+  List<String> items;
   String dropDownValue = "";
+  String settingName;
 
-  DropDownMenu(List<String> items) {
-    this.items = items;
+  DropDownMenu(this.items, this.settingName) {
     dropDownValue = items[0];
+  }
+
+  _init () async {
+    dropDownValue = await PreferenceSetter.readString(settingName);
   }
 
   @override
@@ -18,8 +24,23 @@ class DropDownMenu extends StatefulWidget {
 }
 
 class _DropDownMenuState extends State<DropDownMenu> {
+
+  @override
+  void initState() {
+    super.initState();
+    _read(); // read in initState
+  }
+
+  _read() async {
+    var prefs = await SharedPreferences.getInstance();
+    setState(() {
+      widget.dropDownValue = prefs.getString(widget.settingName) ?? widget.items[0]; // get the value
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return DropdownButton(
       value: widget.dropDownValue,
       icon: const Icon(Icons.arrow_downward),
@@ -37,6 +58,7 @@ class _DropDownMenuState extends State<DropDownMenu> {
       onChanged: (String? newValue) {
         setState(() {
           widget.dropDownValue = newValue!;
+          PreferenceSetter.writeString(widget.settingName, newValue);
         });
       },
     );
@@ -57,7 +79,7 @@ class _SettingPageState extends State<SettingPage> {
     double leftWidth = pageWidth * 0.4;
     double rightWidth = pageWidth - leftWidth;
 
-    final separator = const SizedBox(
+    const separator = SizedBox(
       height: 40,
     );
 
@@ -157,7 +179,7 @@ class _SettingPageState extends State<SettingPage> {
                     const Spacer(),
                     Container(
                         margin: const EdgeInsets.only(right: 10),
-                      child: DropDownMenu(const ["English", "French", "Chinese", "German", "Italian", "Japanese"])
+                      child: DropDownMenu(const ["English", "French", "Chinese", "German", "Italian", "Japanese"], "Language")
                     ),
                   ],
                 ),
@@ -177,7 +199,7 @@ class _SettingPageState extends State<SettingPage> {
                     const Spacer(),
                     Container(
                       margin: const EdgeInsets.only(right: 10),
-                      child: DropDownMenu(const ["Medium", "Small", "Large"])
+                      child: DropDownMenu(const ["Medium", "Small", "Large"], "Font_Size")
                     ),
                   ],
                 ),
@@ -197,7 +219,7 @@ class _SettingPageState extends State<SettingPage> {
                     const Spacer(),
                     Container(
                         margin: const EdgeInsets.only(right: 10),
-                        child: DropDownMenu(const ["Off", "On"])
+                        child: DropDownMenu(const ["Off", "On"], "Dark_Mode")
                     ),
                   ],
                 ),
@@ -257,7 +279,7 @@ class _SettingPageState extends State<SettingPage> {
                   alignment: Alignment.centerLeft,
                   child: Container(
                       margin: const EdgeInsets.only(left: 10),
-                      child: DropDownMenu(const ["Weight Loss", "Muscle Gain", "Calcium Supplement", ])
+                      child: DropDownMenu(const ["Default Plan", "Weight Loss", "Muscle Gain", "Calcium Supplement"], "Target_Plan")
                   ),
                 ),
                 separator,

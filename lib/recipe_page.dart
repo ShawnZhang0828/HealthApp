@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -62,9 +63,23 @@ class _RecipePageState extends State<RecipePage> {
               child: CircleAvatar(
                 backgroundColor: const Color(0xff446054),
                 radius: 65,
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(basicInfo[1]),
-                  radius: 60,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 1.5),
+                  child: CachedNetworkImage(
+                    alignment: Alignment.center,
+                    imageUrl: basicInfo[1],
+                    imageBuilder: (context, imageProvider) => Container(
+                      width: 123,
+                      height: 123,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -1,9 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_app/search_result_page.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_tags/flutter_tags.dart';
+import 'BackendService/RecipeSort.dart';
 import 'BackendService/WebSraper.dart';
+import 'BackendService/SetPreference.dart';
 import 'main_page.dart';
+
+enum ButtonState { init, loading, done }
 
 List<String> tagsList = ['watermelon', 'apple', 'pork', 'meat', 'banana', 'cucumber', 'tomato', 'potato', 'butter', 'egg', 'garlic', 'onion', 'tofu'];
 List<String> selectedTags = [];
@@ -24,8 +29,83 @@ class ingredientTags extends StatefulWidget {
 
 class _IngredientInputPageState extends State<IngredientInputPage> {
 
+  ButtonState state = ButtonState.init;
+
+  Widget loadingSpinner(bool isDone) {
+    return Container(
+      // width: 30,
+      // height: 30,
+      margin: const EdgeInsets.only(right: 10),
+      child: isDone
+        ? doneIcon()
+        : const CircularProgressIndicator(color: Color(0xff8ca875)),
+    );
+  }
+
+  Widget doneIcon () {
+    return Container(
+      margin: const EdgeInsets.only(right: 10),
+      child: const Icon(
+        Icons.check_circle_outline,
+        color: Color(0xff8ca875),
+        size: 32,
+      ),
+    );
+  }
+
+  Widget submitButton() {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(const Color(0xff8ca875)),
+      ),
+      onPressed: () async {
+        setState(() => state = ButtonState.loading);
+
+        AllRecipeDataPasser.result = SearchResult();
+        // print("========== printing from ingredient input page ==========");
+        // print(AllRecipeDataPasser.result.recipeNames);
+        AllRecipeReceiver.result = AllRecipeDataPasser.result;
+
+        await Future.delayed(const Duration(seconds: 2));
+
+        RecipeSorter sorter = RecipeSorter(AllRecipeReceiver.result.recipeNames, AllRecipeReceiver.result.imageURLs, AllRecipeReceiver.result.recipePageURLs);
+        String preference = await PreferenceSetter.readString("Target_Plan");
+        print(preference);
+        if (preference == "Weight Loss") {
+          sorter.sortByCalories();
+
+          await Future.delayed(const Duration(seconds: 13));
+
+          setState(() => state = ButtonState.done);
+          await Future.delayed(const Duration(seconds: 2));
+          setState(() => state = ButtonState.init);
+
+          AllRecipeReceiver.result.recipeNames = sorter.recipeNames;
+          AllRecipeReceiver.result.imageURLs = sorter.imageURLs;
+          AllRecipeReceiver.result.recipePageURLs = sorter.recipePageURLs;
+          print(AllRecipeReceiver.result.recipeNames);
+        } else if (preference == "Default Plan") {
+          setState(() => state = ButtonState.done);
+          await Future.delayed(const Duration(seconds: 1));
+          setState(() => state = ButtonState.init);
+        }
+
+
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SearchResultPage()),
+        );
+      },
+      child: const Text("Submit"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    final isInit = state == ButtonState.init;
+    final isDone = state == ButtonState.done;
 
     return Scaffold(
       appBar: AppBar(
@@ -47,23 +127,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(const Color(0xff8ca875)),
-                ),
-                onPressed: () async {
-                  AllRecipeDataPasser.result = SearchResult();
-                  // print("========== printing from ingredient input page ==========");
-                  // print(AllRecipeDataPasser.result.recipeNames);
-                  AllRecipeReceiver.result = AllRecipeDataPasser.result;
-                  await Future.delayed(const Duration(seconds: 2));
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SearchResultPage()),
-                  );
-                },
-                child: const Text("Submit"),
-              ),
+              child: isInit ? submitButton() : loadingSpinner(isDone),
             ),
             TypeAheadField(
               textFieldConfiguration: TextFieldConfiguration(

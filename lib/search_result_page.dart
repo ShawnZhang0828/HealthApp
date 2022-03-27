@@ -89,8 +89,8 @@ class _SearchResultState extends State<SearchResultPage> {
                               child: CachedNetworkImage(
                                 imageUrl: AllRecipeReceiver.result.imageURLs[index],
                                 imageBuilder: (context, imageProvider) => Container(
-                                  width: 60,
-                                  height: 60,
+                                  width: 65,
+                                  height: 65,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(

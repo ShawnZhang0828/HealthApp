@@ -177,4 +177,26 @@ class WebScraper{
     }
   }
 
+  extractCalories (String recipeURL) async {
+    final response = await http.Client().get(Uri.parse(recipeURL));
+
+    if (response.statusCode == 200) {
+      var document = parser.parse(response.body);
+      try {
+        var nutritionFactList = document.getElementsByClassName("recipeNutritionSectionBlock");
+        String nutritionFact = nutritionFactList[0].children[1].text.trim();
+
+        final match = RegExp('.*calories').firstMatch(nutritionFact);
+        int? endIndex = match?.group(0)?.indexOf("c");
+        final firstMatch = match?.group(0)?.substring(0, endIndex);
+        int calorieNum = int.parse(firstMatch!);
+
+        return calorieNum;
+      } catch (e) {
+        print(e);
+        return [];
+      }
+    }
+  }
+
 }
