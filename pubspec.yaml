@@ -60,6 +60,9 @@ dependencies:
   # Preference and settings
   shared_preferences: ^2.0.13
 
+  # Image Cache
+  cached_network_image: ^3.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:health_app/ingrediant_input_page.dart';
 import 'package:health_app/recipe_page.dart';
 import 'BackendService/WebSraper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class AllRecipeReceiver {
   static SearchResult result = SearchResult();
@@ -85,15 +86,32 @@ class _SearchResultState extends State<SearchResultPage> {
                           children: [
                             Container(
                               margin: const EdgeInsets.only(left: 10),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.black,
-                                radius: 33,
-                                child: CircleAvatar(
-                                  backgroundImage: NetworkImage(AllRecipeReceiver.result.imageURLs[index]),
-                                  radius: 30,
+                              child: CachedNetworkImage(
+                                imageUrl: AllRecipeReceiver.result.imageURLs[index],
+                                imageBuilder: (context, imageProvider) => Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              // child: CircleAvatar(
+                              //   backgroundColor: Colors.black,
+                              //   radius: 33,
+                              //   child: CircleAvatar(
+                              //     backgroundImage: NetworkImage(AllRecipeReceiver.result.imageURLs[index]),
+                              //     child: CachedNetworkImage(
+                              //       imageUrl: AllRecipeReceiver.result.imageURLs[index],
+                              //     ),
+                              //     radius: 30,
+                              //   ),
+                              // ),
                             Container(
                               width: 235,
                               margin: const EdgeInsets.only(left: 30),

@@ -56,7 +56,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
                   // print("========== printing from ingredient input page ==========");
                   // print(AllRecipeDataPasser.result.recipeNames);
                   AllRecipeReceiver.result = AllRecipeDataPasser.result;
-                  await Future.delayed(const Duration(seconds: 3));
+                  await Future.delayed(const Duration(seconds: 2));
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SearchResultPage()),
