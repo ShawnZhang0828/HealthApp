@@ -46,7 +46,7 @@ dependencies:
   cupertino_icons: ^1.0.4
   flutter_typeahead: ^3.2.4
   material_tag_editor: ^0.1.2
-  textfield_tags: ^1.4.4
+  textfield_tags: ^2.0.0
   flutter_tags: ^1.0.0-nullsafety.1
 
   # Web Scraping
@@ -56,6 +56,9 @@ dependencies:
 
   # Web launcher:
   url_launcher: ^6.0.20
+
+  # Preference and settings
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:
@@ -109,6 +112,9 @@ flutter:
     - family: AlfaSlabOne
       fonts:
         - asset: assets/fonts/AlfaSlabOne-Regular.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-VariableFont_wght.ttf
 
   #   - family: Trajan Pro
   #     fonts:

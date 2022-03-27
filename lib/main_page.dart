@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:health_app/ingrediant_input_page.dart';
-import 'package:health_app/login_page.dart';
-import 'dashboard.dart';
+import 'package:health_app/setting_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -18,20 +16,20 @@ class _MainPageState extends State<MainPage> {
 
     final settingButton = IconButton(
         onPressed: () => {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()))
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SettingPage()))
         },
-        icon: Icon(Icons.article_outlined),
+        icon: const Icon(Icons.article_outlined),
         iconSize: 40,
     );
     final favButton = IconButton(
         onPressed: () => {},
-        icon: Icon(Icons.star_outline),
+        icon: const Icon(Icons.star_outline),
         iconSize: 40,
     );
     final cameraButton = RawMaterialButton(
         onPressed: () => {},
         child: Hero(
-            tag: 'hero',
+            tag: 'camera-icon',
             child: CircleAvatar(
               radius: 100,
               child: Image.asset('assets/images/camera-icon.png'),
@@ -39,18 +37,18 @@ class _MainPageState extends State<MainPage> {
         ),
     );
     final ingredientInput = Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: TextField(
         onTap: () => {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => IngredientInputPage()))
         },
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             ),
-            prefixIcon: Align(
+            prefixIcon: const Align(
                 widthFactor: 1.0,
                 heightFactor: 1.0,
                 child: Icon(

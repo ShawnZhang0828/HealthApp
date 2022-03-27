@@ -6,10 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class RecipePageInfoReceiver {
   static String recipeURL = "";
-  static List<String> basicInfo = [];
-  static List<String> ingredients = [];
-  static List<String> directions = [];
-  static List<String> nutritionFacts = [];
+  static List<String> basicInfo = ["N/A"];
+  static List<String> ingredients = ["N/A"];
+  static List<String> directions = ["N/A"];
+  static List<String> nutritionFacts = ["N/A"];
 
   getBasicInfo () async {
     basicInfo =  await WebScraper().extractRecipeInfoURL(RecipePageInfoReceiver.recipeURL);

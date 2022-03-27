@@ -32,7 +32,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
         title: const Text('Enter Ingredients'),
         backgroundColor: const Color(0xff71c1aa),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage())),
           },
@@ -56,7 +56,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
                   // print("========== printing from ingredient input page ==========");
                   // print(AllRecipeDataPasser.result.recipeNames);
                   AllRecipeReceiver.result = AllRecipeDataPasser.result;
-                  await Future.delayed(const Duration(seconds: 2));
+                  await Future.delayed(const Duration(seconds: 3));
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SearchResultPage()),

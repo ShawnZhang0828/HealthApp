@@ -70,15 +70,12 @@ class _SearchResultState extends State<SearchResultPage> {
                           maximumSize: MaterialStateProperty.all(const Size(240, 40)),
                         ),
                         onPressed: () async {
-                          // RecipeInfoDataPasser.result = SearchResult(recipeURL: AllRecipeReceiver.result.recipePageURLs[index]);
-                          // print("========== printing from search result page ==========");
-                          // print(RecipeInfoDataPasser.result.prepTime);
                           RecipePageInfoReceiver.recipeURL = AllRecipeReceiver.result.recipePageURLs[index];
                           RecipePageInfoReceiver().getBasicInfo();
                           RecipePageInfoReceiver().getIngredients();
                           RecipePageInfoReceiver().getDirections();
                           RecipePageInfoReceiver().getNutritionFacts();
-                          await Future.delayed(const Duration(seconds: 3));
+                          await Future.delayed(const Duration(seconds: 4));
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => RecipePage()),
