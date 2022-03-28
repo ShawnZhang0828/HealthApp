@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/BackendService/SetPreference.dart';
 import 'package:health_app/ingrediant_input_page.dart';
 import 'package:health_app/setting_page.dart';
+import 'favorite_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -10,9 +12,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
-    // double cameraSize;
-    // if (keyboardIsOpen) {cameraSize = 40;}
-    // else {cameraSize = 100;}
 
     final settingButton = IconButton(
         onPressed: () => {
@@ -22,7 +21,11 @@ class _MainPageState extends State<MainPage> {
         iconSize: 40,
     );
     final favButton = IconButton(
-        onPressed: () => {},
+        onPressed: () async {
+          FavRecipeReceiver.RecipeInfoList = await PreferenceSetter.readStringList("favorite");
+          await Future.delayed(const Duration(seconds: 1));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FavoritePage()));
+        },
         icon: const Icon(Icons.star_outline),
         iconSize: 40,
     );

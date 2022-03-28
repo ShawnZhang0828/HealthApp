@@ -1,9 +1,96 @@
+import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'BackendService/WebSraper.dart';
+import 'BackendService/SetPreference.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+class FavButton extends StatefulWidget {
+
+  bool inFav = false;
+  String recipeName = RecipePageInfoReceiver.basicInfo[0];
+  List<String> favList = [];
+
+  _init () async {
+    favList = await PreferenceSetter.readString("favorite");
+    inFav = favList.contains(recipeName);
+  }
+
+  @override
+  _FavButtonState createState() => _FavButtonState();
+}
+
+class _FavButtonState extends State<FavButton> {
+
+  @override
+  void initState() {
+    super.initState();
+    _read(); // read in initState
+  }
+
+  _read() async {
+    List<String> favList = await PreferenceSetter.readStringList("favorite");
+    List<String> recipeInfoList = [
+      RecipePageInfoReceiver.basicInfo[0],
+      RecipePageInfoReceiver.basicInfo[1],
+      RecipePageInfoReceiver.recipeURL
+    ];
+    String recipeInfoString = json.encode(recipeInfoList);
+    setState(() {
+      widget.inFav = favList.contains(recipeInfoString);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return widget.inFav
+      ? IconButton(
+      onPressed: () async {
+        List<String> recipeInfoList = [
+          RecipePageInfoReceiver.basicInfo[0],
+          RecipePageInfoReceiver.basicInfo[1],
+          RecipePageInfoReceiver.recipeURL
+        ];
+        String recipeInfoString = json.encode(recipeInfoList);
+        List<String> favList = await PreferenceSetter.readStringList("favorite");
+        favList.remove(recipeInfoString);
+        PreferenceSetter.writeList("favorite", favList);
+        setState(() {
+          widget.inFav = favList.contains(recipeInfoString);
+        });
+      },
+      icon: const Icon(
+        Icons.favorite,
+        size: 32,
+        color: Color(0xff367349),
+      ),
+    ) : IconButton(
+      onPressed: () async {
+        List<String> recipeInfoList = [
+          RecipePageInfoReceiver.basicInfo[0],
+          RecipePageInfoReceiver.basicInfo[1],
+          RecipePageInfoReceiver.recipeURL
+        ];
+        String recipeInfoString = json.encode(recipeInfoList);
+        List<String> favList = await PreferenceSetter.readStringList("favorite");
+        favList.add(recipeInfoString);
+        PreferenceSetter.writeList("favorite", favList);
+        setState(() {
+          widget.inFav = favList.contains(recipeInfoString);
+        });
+        print(favList);
+      },
+      icon: const Icon(
+        Icons.favorite_border,
+        size: 32,
+        color: Color(0xff367349),
+      ),
+    );
+  }
+}
 
 class RecipePageInfoReceiver {
   static String recipeURL = "";
@@ -58,30 +145,38 @@ class _RecipePageState extends State<RecipePage> {
         color: const Color(0xff86a993),
         child: ListView(
           children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 20, top: 15),
-              child: CircleAvatar(
-                backgroundColor: const Color(0xff446054),
-                radius: 65,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 1.5),
-                  child: CachedNetworkImage(
-                    alignment: Alignment.center,
-                    imageUrl: basicInfo[1],
-                    imageBuilder: (context, imageProvider) => Container(
-                      width: 123,
-                      height: 123,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 20, top: 15, left: width*0.34),
+                  child: CircleAvatar(
+                    backgroundColor: const Color(0xff446054),
+                    radius: 65,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 1.5),
+                      child: CachedNetworkImage(
+                        alignment: Alignment.center,
+                        imageUrl: basicInfo[1],
+                        imageBuilder: (context, imageProvider) => Container(
+                          width: 123,
+                          height: 123,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
+                Container(
+                  padding: EdgeInsets.only(left: width*0.0, bottom: 110),
+                  child: FavButton(),
+                ),
+              ],
             ),
             Container(
               alignment: Alignment.center,

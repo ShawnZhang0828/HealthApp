@@ -26,6 +26,12 @@ class PreferenceSetter {
     await prefs.setString(key, value);
   }
 
+  static writeList (String key, List<String> value) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setStringList(key, value);
+  }
+
   static readInt (String key) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -54,6 +60,14 @@ class PreferenceSetter {
     final prefs = await SharedPreferences.getInstance();
 
     final String? output = prefs.getString(key);
+
+    return output;
+  }
+
+  static readStringList (String key) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final List<String>? output = prefs.getStringList(key);
 
     return output;
   }
