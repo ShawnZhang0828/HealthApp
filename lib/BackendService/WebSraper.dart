@@ -199,4 +199,27 @@ class WebScraper{
     }
   }
 
+  extractProtein (String recipeURL) async {
+    final response = await http.Client().get(Uri.parse(recipeURL));
+
+    if (response.statusCode == 200) {
+      var document = parser.parse(response.body);
+      try {
+        var nutritionFactList = document.getElementsByClassName("recipeNutritionSectionBlock");
+        String nutritionFact = nutritionFactList[0].children[1].text.trim();
+
+        final match = RegExp('protein.*g').firstMatch(nutritionFact);
+        int? startIndex = match?.group(0)?.indexOf("n");
+        int? endIndex = match?.group(0)?.indexOf("g");
+        final firstMatch = match?.group(0)?.substring(startIndex!+1, endIndex);
+        double proteinNum = double.parse(firstMatch!);
+
+        return proteinNum;
+      } catch (e) {
+        print(e);
+        return [];
+      }
+    }
+  }
+
 }

@@ -30,6 +30,7 @@ class ingredientTags extends StatefulWidget {
 class _IngredientInputPageState extends State<IngredientInputPage> {
 
   ButtonState state = ButtonState.init;
+  int sortDelay = 13;
 
   Widget loadingSpinner(bool isDone) {
     return Container(
@@ -74,7 +75,20 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
         if (preference == "Weight Loss") {
           sorter.sortByCalories();
 
-          await Future.delayed(const Duration(seconds: 13));
+          await Future.delayed(Duration(seconds: sortDelay));
+
+          setState(() => state = ButtonState.done);
+          await Future.delayed(const Duration(seconds: 2));
+          setState(() => state = ButtonState.init);
+
+          AllRecipeReceiver.result.recipeNames = sorter.recipeNames;
+          AllRecipeReceiver.result.imageURLs = sorter.imageURLs;
+          AllRecipeReceiver.result.recipePageURLs = sorter.recipePageURLs;
+          print(AllRecipeReceiver.result.recipeNames);
+        } else if (preference == "Muscle Gain") {
+          sorter.sortByProtein();
+
+          await Future.delayed(Duration(seconds: sortDelay));
 
           setState(() => state = ButtonState.done);
           await Future.delayed(const Duration(seconds: 2));
@@ -89,8 +103,6 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
           await Future.delayed(const Duration(seconds: 1));
           setState(() => state = ButtonState.init);
         }
-
-
 
         Navigator.push(
           context,
