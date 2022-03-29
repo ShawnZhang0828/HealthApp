@@ -34,8 +34,14 @@ class _MainPageState extends State<MainPage> {
         child: Hero(
             tag: 'camera-icon',
             child: CircleAvatar(
-              radius: 100,
-              child: Image.asset('assets/images/camera-icon.png'),
+              backgroundColor: Theme.of(context).backgroundColor,
+              // backgroundColor: Colors.black,
+              radius: 102.5,
+              child: CircleAvatar(
+                radius: 100,
+                backgroundColor: Theme.of(context).canvasColor,
+                child: Image.asset('assets/images/camera-icon.png'),
+              ),
             )
         ),
     );

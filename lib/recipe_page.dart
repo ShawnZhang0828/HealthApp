@@ -65,7 +65,8 @@ class _FavButtonState extends State<FavButton> {
       icon: const Icon(
         Icons.favorite,
         size: 32,
-        color: Color(0xff367349),
+        // TODO
+        // color: Color(0xff367349),
       ),
     ) : IconButton(
       onPressed: () async {
@@ -83,10 +84,12 @@ class _FavButtonState extends State<FavButton> {
         });
         print(favList);
       },
-      icon: const Icon(
+      icon: Icon(
         Icons.favorite_border,
-        size: 32,
-        color: Color(0xff367349),
+        size: Theme.of(context).iconTheme.size,
+        // TODO
+        color: Theme.of(context).iconTheme.color,
+        // color: Color(0xff367349),
       ),
     );
   }
@@ -136,13 +139,20 @@ class _RecipePageState extends State<RecipePage> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // color: const Color(0xff86a993),a
       appBar: AppBar(
-        title: Text(basicInfo[0]),
-        backgroundColor: const Color(0xff71c1aa),
+        title: Text(
+          basicInfo[0],
+          style: TextStyle(
+            color: Theme.of(context).secondaryHeaderColor,
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).secondaryHeaderColor,
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Container(
-        color: const Color(0xff86a993),
+        color: Theme.of(context).canvasColor,
         child: ListView(
           children: [
             Row(
@@ -150,7 +160,8 @@ class _RecipePageState extends State<RecipePage> {
                 Container(
                   margin: EdgeInsets.only(bottom: 20, top: 15, left: width*0.34),
                   child: CircleAvatar(
-                    backgroundColor: const Color(0xff446054),
+                    // TODO
+                    backgroundColor: Theme.of(context).backgroundColor,
                     radius: 65,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 1.5),
@@ -184,8 +195,8 @@ class _RecipePageState extends State<RecipePage> {
               child: Text(
                 basicInfo[0],
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Color(0xff367349),
+                style: TextStyle(
+                  color: Theme.of(context).secondaryHeaderColor,
                   fontSize: 28,
                   fontFamily: 'AlfaSlabOne',
                   decoration: TextDecoration.none,
@@ -198,13 +209,15 @@ class _RecipePageState extends State<RecipePage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                      color: Color(0xff97ca9b),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    decoration: BoxDecoration(
+                      // TODO
+                      color: Theme.of(context).canvasColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xff367349),
-                          offset: Offset(5, 5),
+                          // TODO
+                          color: Theme.of(context).shadowColor,
+                          offset: const Offset(5, 5),
                         ),
                       ],
                     ),
@@ -263,11 +276,11 @@ class _RecipePageState extends State<RecipePage> {
             ),
             Container(
               margin: const EdgeInsets.only(bottom: 15),
-              child: const Text(
+              child: Text(
                 "Ingredients",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0xff495b41),
+                  color: Theme.of(context).secondaryHeaderColor,
                   fontSize: 30,
                   fontFamily: 'VarelaRound',
                   decoration: TextDecoration.none,
@@ -314,11 +327,11 @@ class _RecipePageState extends State<RecipePage> {
             ),
             Container(
               margin: const EdgeInsets.only(bottom: 10, top: 20),
-              child: const Text(
+              child: Text(
                 "Directions",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0xff495b41),
+                  color: Theme.of(context).secondaryHeaderColor,
                   fontSize: 30,
                   fontFamily: 'VarelaRound',
                   decoration: TextDecoration.none,
@@ -373,11 +386,11 @@ class _RecipePageState extends State<RecipePage> {
             ),
             Container(
               margin: const EdgeInsets.only(bottom: 5, top: 15),
-              child: const Text(
+              child: Text(
                 "Nutrition Overview",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0xff495b41),
+                  color: Theme.of(context).secondaryHeaderColor,
                   fontSize: 30,
                   fontFamily: 'VarelaRound',
                   decoration: TextDecoration.none,
@@ -416,10 +429,10 @@ class _RecipePageState extends State<RecipePage> {
               child: RichText(
                 text: TextSpan(
                   children: [
-                    const TextSpan(
+                    TextSpan(
                       text: "Source of data: ",
                       style: TextStyle(
-                        color: Color(0xff495b41),
+                        color: Theme.of(context).secondaryHeaderColor,
                         fontSize: 13,
                         fontFamily: 'VarelaRound',
                         decoration: TextDecoration.none,
@@ -427,8 +440,8 @@ class _RecipePageState extends State<RecipePage> {
                     ),
                     TextSpan(
                       text: 'allrecipes',
-                      style: const TextStyle(
-                        color: Color(0xff495b41),
+                      style: TextStyle(
+                        color: Theme.of(context).secondaryHeaderColor,
                         fontSize: 13,
                         fontFamily: 'VarelaRound',
                         decoration: TextDecoration.none,

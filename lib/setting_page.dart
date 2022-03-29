@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'BackendService/SetPreference.dart';
 import 'login_page.dart';
 import 'main_page.dart';
+import 'main.dart';
 
 class DropDownMenu extends StatefulWidget {
 
@@ -38,29 +39,52 @@ class _DropDownMenuState extends State<DropDownMenu> {
     });
   }
 
+  createAlertDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          title: Text("Changing Color Theme Reminder"),
+          content: Text("Restart the app to finish up changing the color theme !"),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    return DropdownButton(
-      value: widget.dropDownValue,
-      icon: const Icon(Icons.arrow_downward),
-      underline: Container(
-        height: 2,
-        color: const Color(0xff71c1aa),
+    return Theme(
+      data: Theme.of(context).colorScheme == const ColorScheme.light() ? ThemeData.light() : ThemeData.dark(),
+      child: DropdownButton(
+        value: widget.dropDownValue,
+        icon: const Icon(Icons.arrow_downward),
+        underline: Container(
+          height: 2,
+          color: const Color(0xff71c1aa),
+        ),
+        isExpanded: false,
+        items: widget.items.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: TextStyle(
+                color: Theme.of(context).secondaryHeaderColor,
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {
+          setState(() {
+            widget.dropDownValue = newValue!;
+            PreferenceSetter.writeString(widget.settingName, newValue);
+          });
+          if (widget.settingName == "Dark_Mode") {
+            createAlertDialog(context);
+          }
+        },
       ),
-      isExpanded: false,
-      items: widget.items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      onChanged: (String? newValue) {
-        setState(() {
-          widget.dropDownValue = newValue!;
-          PreferenceSetter.writeString(widget.settingName, newValue);
-        });
-      },
     );
   }
 }
@@ -85,8 +109,16 @@ class _SettingPageState extends State<SettingPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
-        backgroundColor: const Color(0xff71c1aa),
+        title: Text(
+          "Settings",
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor,
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => {
@@ -121,23 +153,55 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.settings),
-                  title: const Text("General"),
+                  leading: Icon(
+                    Icons.settings,
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  title: Text(
+                    "General",
+                    style: TextStyle(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
+                  ),
                   onTap: () => null,
                 ),
                 ListTile(
-                  leading: const Icon(Icons.account_box),
-                  title: const Text("Account"),
+                  leading: Icon(
+                    Icons.account_box,
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  title: Text(
+                    "Account",
+                    style: TextStyle(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
+                  ),
                   onTap: () => null,
                 ),
                 ListTile(
-                  leading: const Icon(Icons.person_outline),
-                  title: const Text("Personalization"),
+                  leading: Icon(
+                    Icons.person_outline,
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  title: Text(
+                    "Personalization",
+                    style: TextStyle(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
+                  ),
                   onTap: () => null,
                 ),
                 ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text("LogOut"),
+                  leading: Icon(
+                    Icons.logout,
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  title: Text(
+                    "LogOut",
+                    style: TextStyle(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
+                  ),
                   onTap: () => {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()))
                   },
@@ -154,11 +218,12 @@ class _SettingPageState extends State<SettingPage> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 10, left: 10),
-                  child: const Text(
+                  child: Text(
                     "General",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                   ),
                 ),
@@ -167,12 +232,13 @@ class _SettingPageState extends State<SettingPage> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 10),
-                      child: const Text(
+                      child: Text(
                         "Language",
                         style: TextStyle(
                           fontSize: 18,
                           fontFamily: 'Nunito',
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).secondaryHeaderColor,
                         ),
                       ),
                     ),
@@ -187,12 +253,13 @@ class _SettingPageState extends State<SettingPage> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 10),
-                      child: const Text(
+                      child: Text(
                         "Font Size",
                         style: TextStyle(
                           fontSize: 18,
                           fontFamily: 'Nunito',
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).secondaryHeaderColor,
                         ),
                       ),
                     ),
@@ -207,12 +274,13 @@ class _SettingPageState extends State<SettingPage> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 10),
-                      child: const Text(
+                      child: Text(
                         "Dark Mode",
                         style: TextStyle(
                           fontSize: 18,
                           fontFamily: 'Nunito',
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).secondaryHeaderColor,
                         ),
                       ),
                     ),
@@ -226,11 +294,12 @@ class _SettingPageState extends State<SettingPage> {
                 separator,
                 Container(
                   margin: const EdgeInsets.only(top: 10, left: 10),
-                  child: const Text(
+                  child: Text(
                     "Account",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                   ),
                 ),
@@ -239,15 +308,12 @@ class _SettingPageState extends State<SettingPage> {
                   child: Container(
                     margin: const EdgeInsets.only(left: 10, top: 10),
                     child: TextButton(
-                      style: TextButton.styleFrom(
-                        alignment: Alignment.center,
-                        backgroundColor: const Color.fromRGBO(127, 191, 164, 100),
-                      ),
+                      style: Theme.of(context).textButtonTheme.style,
                       onPressed: () => {},
-                      child: const Text(
+                      child: Text(
                         "Reset Password",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ),
@@ -256,22 +322,24 @@ class _SettingPageState extends State<SettingPage> {
                 separator,
                 Container(
                   margin: const EdgeInsets.only(top: 10, left: 10),
-                  child: const Text(
+                  child: Text(
                     "Personalization",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                   ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 10, top: 10),
-                  child: const Text(
+                  child: Text(
                     "Target Plan",
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: 'Nunito',
                       fontWeight: FontWeight.bold,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                   ),
                 ),
@@ -286,19 +354,20 @@ class _SettingPageState extends State<SettingPage> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       children: [
                         WidgetSpan(
                           child: Icon(
                             Icons.warning_amber,
                             size: 17,
+                            color: Theme.of(context).secondaryHeaderColor,
                           ),
                         ),
                         TextSpan(
                           text: "\t Please follow doctor's advice if you have any special health conditions.",
                           style:  TextStyle(
                             fontSize: 12,
-                            color: Colors.black,
+                            color: Theme.of(context).secondaryHeaderColor,
                           ),
                         ),
                       ],

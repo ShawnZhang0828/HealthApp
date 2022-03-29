@@ -10,7 +10,10 @@ import 'main_page.dart';
 
 enum ButtonState { init, loading, done }
 
-List<String> tagsList = ['watermelon', 'apple', 'pork', 'meat', 'banana', 'cucumber', 'tomato', 'potato', 'butter', 'egg', 'garlic', 'onion', 'tofu'];
+List<String> tagsList = ['watermelon', 'apple', 'pork', 'beef', 'banana', 'cucumber', 'tomato', 'potato', 'butter', 'egg', 'garlic', 'onion', 'tofu',
+  'milk', 'chicken wing', 'honey', 'lettuce', 'gingers', 'broccoli', 'celery', 'cabbages', 'asparagus', 'carrots', 'eggplant', 'mushrooms',
+  'peas', 'corn', 'chicken thigh', 'bamboo shoots', 'cassava', 'leeks', 'pepper', 'pumpkin', 'radicchio', 'yam root', 'flour', 'salmon', 'steak', 'shrimps',
+  'avocado', 'beef ribs', 'chicken breast', 'crab', 'cauliflower', 'pepper', 'cilantro', 'french beans'];
 List<String> selectedTags = [];
 
 class AllRecipeDataPasser {
@@ -30,7 +33,7 @@ class ingredientTags extends StatefulWidget {
 class _IngredientInputPageState extends State<IngredientInputPage> {
 
   ButtonState state = ButtonState.init;
-  int sortDelay = 13;
+  int sortDelay = 15;
 
   Widget loadingSpinner(bool isDone) {
     return Container(
@@ -56,9 +59,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
 
   Widget submitButton() {
     return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(const Color(0xff8ca875)),
-      ),
+      style: Theme.of(context).elevatedButtonTheme.style,
       onPressed: () async {
         setState(() => state = ButtonState.loading);
 
@@ -109,7 +110,12 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
           MaterialPageRoute(builder: (context) => SearchResultPage()),
         );
       },
-      child: const Text("Submit"),
+      child: Text(
+        "Submit",
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+        ),
+      ),
     );
   }
 
@@ -121,8 +127,16 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Ingredients'),
-        backgroundColor: const Color(0xff71c1aa),
+        title: Text(
+          'Enter Ingredients',
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor,
+        ),
+        backgroundColor:Theme.of(context).appBarTheme.backgroundColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => {

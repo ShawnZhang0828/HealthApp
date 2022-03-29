@@ -30,8 +30,16 @@ class _SearchResultState extends State<SearchResultPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search Results"),
-        backgroundColor: const Color(0xff71c1aa),
+        title: Text(
+          "Search Results",
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor,
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Container(
         color: const Color.fromRGBO(207, 202, 209, 100),
@@ -60,15 +68,17 @@ class _SearchResultState extends State<SearchResultPage> {
                     height: 100,
                     margin: const EdgeInsets.only(bottom: 10, left: 15, right: 15, top: 10),
                     padding: const EdgeInsets.all(3.0),
-                    // decoration: BoxDecoration(
-                    //     border: Border.all(color: Colors.blueAccent)
-                    // ),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(127, 191, 164, 100)),
                           shadowColor: MaterialStateProperty.all(const Color.fromRGBO(85, 110, 70, 100)),
-                          elevation: MaterialStateProperty.all(20),
+                          elevation: MaterialStateProperty.all(5),
                           maximumSize: MaterialStateProperty.all(const Size(240, 40)),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
                         ),
                         onPressed: () async {
                           RecipePageInfoReceiver.recipeURL = AllRecipeReceiver.result.recipePageURLs[index];

@@ -32,8 +32,15 @@ class _SearchResultState extends State<FavoritePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search Results"),
-        backgroundColor: const Color(0xff71c1aa),
+        title: Text(
+          "Favorites",
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor,
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => {
@@ -59,8 +66,13 @@ class _SearchResultState extends State<FavoritePage> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(127, 191, 164, 100)),
                         shadowColor: MaterialStateProperty.all(const Color.fromRGBO(85, 110, 70, 100)),
-                        elevation: MaterialStateProperty.all(20),
+                        elevation: MaterialStateProperty.all(5),
                         maximumSize: MaterialStateProperty.all(const Size(240, 40)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
                       ),
                       onPressed: () async {
                         RecipePageInfoReceiver.recipeURL = json.decode(FavRecipeReceiver.RecipeInfoList[index])[2];
@@ -102,7 +114,8 @@ class _SearchResultState extends State<FavoritePage> {
                                 fontFamily: 'VarelaRound',
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                // TODO
+                                // color: Colors.black,
                                 decoration: TextDecoration.none,
                               ),
                             ),
