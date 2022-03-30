@@ -355,6 +355,14 @@ class _RecipePageState extends State<RecipePage> {
                             border: Border(
                               bottom: BorderSide(width: 1, color: Color(0xff617750)),
                             ),
+                            // color: Colors.white54,
+                            // borderRadius: BorderRadius.all(Radius.circular(10)),
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //     color: Colors.grey,
+                            //     offset: Offset(0, 3),
+                            //   ),
+                            // ],
                           ),
                           width: 350,
                           child: Text(
@@ -449,17 +457,31 @@ class _RecipePageState extends State<RecipePage> {
                           print(e.toString());
                           return;
                         }
-
+                        // if (await launch(RecipePageInfoReceiver.recipeURL)) {
+                        //   await launch(RecipePageInfoReceiver.recipeURL);
+                        // } else {
+                        //   throw 'Could not launch $RecipePageInfoReceiver.recipeURL';
+                        // }
                       }
                     ),
                   ],
                 ),
               ),
+              // child: const Text(
+              //   "Source of data: allrecipes",
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(
+              //     color: Color(0xff495b41),
+              //     fontSize: 13,
+              //     fontFamily: 'VarelaRound',
+              //     decoration: TextDecoration.none,
+              //   ),
+              // ),
             ),
-          ],
-        ),
+            ],
+          ),
       ),
-    );
+      );
   }
 }
 

@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class Authentication {
+class GoogleAuthentication {
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     
     final logo = Padding(
-      padding: const EdgeInsets.only(bottom: 30, top: 70),
+      padding: const EdgeInsets.only(bottom: 30, top: 115),
       child: Hero(
           tag: 'hero',
           child: CircleAvatar(
@@ -80,45 +80,8 @@ class _LoginPageState extends State<LoginPage> {
           )
       ),
     );
-    final inputEmail = Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: TextField(
-        style: TextStyle(
-          color: Theme.of(context).primaryColor,
-        ),
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          hintText: 'Email',
-          contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50.0)
-          ),
-          fillColor: Theme.of(context).primaryColor,
-          filled: true,
-        ),
-      ),
-    );
-    final inputPassword = Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: TextField(
-        style: TextStyle(
-          color: Theme.of(context).primaryColor,
-        ),
-        keyboardType: TextInputType.emailAddress,
-        obscureText: true,
-        decoration: InputDecoration(
-          hintText: 'Password',
-          contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50.0)
-          ),
-          fillColor: Theme.of(context).primaryColor,
-          filled: true,
-        ),
-      ),
-    );
     final buttonLogin = Padding(
-      padding: const EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.only(bottom: 15),
       child: ButtonTheme(
         height: 56,
         // buttonColor: Theme.of(context).buttonTheme
@@ -132,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           style: Theme.of(context).elevatedButtonTheme.style,
           onPressed: () => {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()))
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage()))
           },
         ),
       ),
@@ -146,21 +109,19 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: null
     );
     final buttonSigninGoogle = FloatingActionButton.extended(
+
       onPressed: () async {
-        setState(() {
-          _isSigningIn = true;
-        });
-
         User? user =
-        await Authentication.signInWithGoogle(context: context);
+          await GoogleAuthentication.signInWithGoogle(context: context);
 
-        setState(() {
-          _isSigningIn = false;
+        setState(()  {
+          _isSigningIn = true;
+          print(user);
+          if (user != null) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
+          }
         });
 
-        if (user != null) {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
-        }
       },
         label: Text(
           'Sign in with Google',
@@ -178,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
         foregroundColor: Colors.white,
       );
     final buttonSignUp = FlatButton(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 30),
       child: Text(
         'Sign Up',
         style: Theme.of(context).textTheme.bodyText1,
@@ -191,11 +152,11 @@ class _LoginPageState extends State<LoginPage> {
         child: Scaffold(
           body: ListView(
             shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             children: <Widget>[
               logo,
-              inputEmail,
-              inputPassword,
+              // inputEmail,
+              // inputPassword,
               buttonLogin,
               SizedBox(
                 height: 10,

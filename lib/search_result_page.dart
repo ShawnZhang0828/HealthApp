@@ -111,9 +111,20 @@ class _SearchResultState extends State<SearchResultPage> {
                                   ),
                                 ),
                               ),
+                              // child: CircleAvatar(
+                              //   backgroundColor: Colors.black,
+                              //   radius: 33,
+                              //   child: CircleAvatar(
+                              //     backgroundImage: NetworkImage(AllRecipeReceiver.result.imageURLs[index]),
+                              //     child: CachedNetworkImage(
+                              //       imageUrl: AllRecipeReceiver.result.imageURLs[index],
+                              //     ),
+                              //     radius: 30,
+                              //   ),
+                              // ),
                             Container(
                               width: 215,
-                              margin: const EdgeInsets.only(left: 20),
+                              margin: const EdgeInsets.only(left: 30),
                               child: Text(
                                 AllRecipeReceiver.result.recipeNames[index],
                                 style: const TextStyle(
