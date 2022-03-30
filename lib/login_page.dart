@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
     final buttonSignUp = FlatButton(
       padding: const EdgeInsets.only(top: 20),
       child: Text(
-        'SignUp',
+        'Sign Up',
         style: Theme.of(context).textTheme.bodyText1,
       ),
       onPressed: () => {

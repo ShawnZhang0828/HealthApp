@@ -184,7 +184,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
 //                return ;
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             _generateTags()
@@ -256,7 +256,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
     if (suggestion.length >= 2) {
       return modifiedList;
     } else {
-      return null;
+      return [];
     }
   }
 

@@ -106,7 +106,7 @@ class _SearchResultState extends State<FavoritePage> {
                             ),
                           ),
                           Container(
-                            width: 235,
+                            width: 215,
                             margin: const EdgeInsets.only(left: 30),
                             child: Text(
                               json.decode(FavRecipeReceiver.RecipeInfoList[index])[0],
