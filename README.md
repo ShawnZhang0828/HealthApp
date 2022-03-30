@@ -1,16 +1,18 @@
-# health_app
+# CHIHAO
 
-HealthApp for 2022 Google Challenge
+### CHIHAO, an app built for 2022 Google Challenge. 
 
-## Getting Started
+Struggling with what to have for dinner? Worrying about food is not healthy enough? Don't know how to handle left-over food? Use CHIHAO!
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+Download the .apk file on your Android phone, and finish up the installation process. Run the installed app on your phone and you are all set!
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Instruction
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+In CHIHAO, you can explore all possibilities of making tasty food with ingredients by your side. 
+1. Start your journey by logging in with either your email or Google account. 
+2. Personalize your requirements by tapping the setting button, and choose the health plan you would like to pursue. 
+3. In the next step, we offer you options to search recipes by manually inputting the ingredients or taking images of ingredients, and all you need to do is to wait for several seconds. 
+4. All relevant recipes will be ready for you to select!
+5. Add recipes you love the most to the favourite by tapping the heart icon besides the recipe image in the recipe page, and you will be able to revisit them whenever you want to！
