@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'dashboard.dart';
 import 'package:health_app/login_page.dart';
-//import "bezierContainer.dart";
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key ?key, this.title}) : super(key: key);
@@ -24,9 +21,13 @@ class _SignUpPageState extends State<SignUpPage> {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           TextField(
@@ -35,8 +36,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.0)
                   ),
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
+                fillColor: Theme.of(context).primaryColor,
+                filled: true,
+              ),
+          ),
         ],
       ),
     );
@@ -51,7 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
           borderRadius: BorderRadius.all(Radius.circular(50)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-                color: Colors.grey.shade200,
+                color: Theme.of(context).shadowColor,
                 offset: Offset(2, 4),
                 blurRadius: 5,
                 spreadRadius: 2)
@@ -79,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
         alignment: Alignment.bottomCenter,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: const <Widget>[
             Text(
               'Already have an account ?',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),

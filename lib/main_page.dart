@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:health_app/BackendService/SetPreference.dart';
 import 'package:health_app/ingrediant_input_page.dart';
-import 'package:health_app/login_page.dart';
-import 'dashboard.dart';
+import 'package:health_app/setting_page.dart';
+import 'favorite_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -12,45 +12,52 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
-    // double cameraSize;
-    // if (keyboardIsOpen) {cameraSize = 40;}
-    // else {cameraSize = 100;}
 
     final settingButton = IconButton(
         onPressed: () => {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()))
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SettingPage()))
         },
-        icon: Icon(Icons.article_outlined),
+        icon: const Icon(Icons.article_outlined),
         iconSize: 40,
     );
     final favButton = IconButton(
-        onPressed: () => {},
-        icon: Icon(Icons.star_outline),
+        onPressed: () async {
+          FavRecipeReceiver.RecipeInfoList = await PreferenceSetter.readStringList("favorite");
+          await Future.delayed(const Duration(seconds: 1));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FavoritePage()));
+        },
+        icon: const Icon(Icons.star_outline),
         iconSize: 40,
     );
     final cameraButton = RawMaterialButton(
         onPressed: () => {},
         child: Hero(
-            tag: 'hero',
+            tag: 'camera-icon',
             child: CircleAvatar(
-              radius: 100,
-              child: Image.asset('assets/images/camera-icon.png'),
+              backgroundColor: Theme.of(context).backgroundColor,
+              // backgroundColor: Colors.black,
+              radius: 102.5,
+              child: CircleAvatar(
+                radius: 100,
+                backgroundColor: Theme.of(context).canvasColor,
+                child: Image.asset('assets/images/camera-icon.png'),
+              ),
             )
         ),
     );
     final ingredientInput = Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: TextField(
         onTap: () => {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => IngredientInputPage()))
         },
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             ),
-            prefixIcon: Align(
+            prefixIcon: const Align(
                 widthFactor: 1.0,
                 heightFactor: 1.0,
                 child: Icon(
