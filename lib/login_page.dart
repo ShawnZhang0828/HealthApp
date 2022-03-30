@@ -113,17 +113,14 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () async {
         User? user =
           await GoogleAuthentication.signInWithGoogle(context: context);
+
         setState(()  {
           _isSigningIn = true;
+          print(user);
           if (user != null) {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
           }
         });
-
-
-        // setState(() {
-        //   _isSigningIn = false;
-        // });
 
       },
         label: Text(

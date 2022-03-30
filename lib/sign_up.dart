@@ -7,8 +7,6 @@ import 'login_page.dart';
 import 'login_setting/authentication.dart';
 import 'main_page.dart';
 
-
-
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key ?key, this.title}) : super(key: key);
 
