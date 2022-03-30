@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "864139218541",
-    "project_id": "healthapp-80a71",
-    "storage_bucket": "healthapp-80a71.appspot.com"
+    "project_number": "120070912021",
+    "project_id": "gdsc-healthapp",
+    "storage_bucket": "gdsc-healthapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:864139218541:android:c017df9914c83642ebf964",
+        "mobilesdk_app_id": "1:120070912021:android:9821978d6ac9102af0761c",
         "android_client_info": {
           "package_name": "com.example.myapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "864139218541-bq7ndic8s5ch1rt31fgoicr7scgdbpjt.apps.googleusercontent.com",
+          "client_id": "120070912021-ieeg6k3vtvbd3bimglpn0v3o8ivvvvnn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBV0mdlX82mUAUNU7rnDEbnM4nEgLM9gwk"
+          "current_key": "AIzaSyAItigOEUenWmjR1b5wbcliDBq16wCsfsc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "864139218541-bq7ndic8s5ch1rt31fgoicr7scgdbpjt.apps.googleusercontent.com",
+              "client_id": "120070912021-ieeg6k3vtvbd3bimglpn0v3o8ivvvvnn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:health_app/sign_up.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'BackendService/SetPreference.dart';
 import 'login_page.dart';
 import 'main_page.dart';
+import 'login_setting/authentication.dart';
 import 'main.dart';
 
 class DropDownMenu extends StatefulWidget {
@@ -202,8 +205,9 @@ class _SettingPageState extends State<SettingPage> {
                       color: Theme.of(context).secondaryHeaderColor,
                     ),
                   ),
-                  onTap: () => {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()))
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   },
                 ),
               ],

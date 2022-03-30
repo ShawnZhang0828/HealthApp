@@ -33,7 +33,7 @@ class ingredientTags extends StatefulWidget {
 class _IngredientInputPageState extends State<IngredientInputPage> {
 
   ButtonState state = ButtonState.init;
-  int sortDelay = 15;
+  int sortDelay = 20;
 
   Widget loadingSpinner(bool isDone) {
     return Container(
@@ -184,7 +184,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
 //                return ;
               },
             ),
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
             _generateTags()
@@ -256,7 +256,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
     if (suggestion.length >= 2) {
       return modifiedList;
     } else {
-      return [];
+      return null;
     }
   }
 
