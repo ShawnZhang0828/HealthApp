@@ -2,11 +2,13 @@
 
 ### CHIHAO, an app built for 2022 Google Challenge. 
 
+<img src="assets/images/app_icon.png" width="100" height="100">
+
 Struggling with what to have for dinner? Worrying about food is not healthy enough? Don't know how to handle left-over food? Use CHIHAO!
 
 ## Installation
 
-Download the .apk file on your Android phone, and finish up the installation process. Run the installed app on your phone and you are all set!
+Download the .apk file on your Android phone and finish up the installation process. Run the installed app on your phone and you are all set!
 
 ## Instruction
 
