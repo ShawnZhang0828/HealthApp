@@ -1,6 +1,6 @@
 # CHIHAO
 
-### CHIHAO, an app built for 2022 Google Challenge. 
+### CHIHAO, an app built for 2022 Google Challenge to address problems relate to people's health and wellbeing. 
 
 <img src="assets/images/app_icon.png" width="100" height="100">
 
