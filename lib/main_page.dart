@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/BackendService/SetPreference.dart';
+import 'package:health_app/camera.dart';
 import 'package:health_app/ingrediant_input_page.dart';
 import 'package:health_app/setting_page.dart';
 import 'favorite_page.dart';
@@ -30,7 +31,9 @@ class _MainPageState extends State<MainPage> {
         iconSize: 40,
     );
     final cameraButton = RawMaterialButton(
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()))
+        },
         child: Hero(
             tag: 'camera-icon',
             child: CircleAvatar(

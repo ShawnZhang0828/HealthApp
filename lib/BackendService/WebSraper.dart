@@ -1,6 +1,6 @@
 import 'package:html/parser.dart' as parser;
 import 'package:http/http.dart' as http;
-
+import 'package:health_app/camera.dart';
 import '../ingrediant_input_page.dart';
 
 class URLGenerator {
@@ -47,8 +47,17 @@ class WebScraper{
     // print("=========== Printing tags ===========");
     // print(SearchResult().tagsForSearch);
     URLGenerator generator = URLGenerator();
-    generator.getRecipePageURL(selectedTags);
-    String URL = generator.getRecipePageURL(selectedTags);
+    String URL;
+    if(selectedTags.length==0){
+      print("hello");
+      print(food);
+      List<String> selected= [food];
+      URL = generator.getRecipePageURL(selected);
+    }
+    else{
+      print("hi");
+      URL = generator.getRecipePageURL(selectedTags);
+    }
     // final response = await http.Client().get(Uri.parse("https://www.allrecipes.com/search/results/?search=apple"));
     final response;
     if (URL == "https://www.allrecipes.com/search/results/?search=") {
