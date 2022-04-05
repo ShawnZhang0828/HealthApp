@@ -46,6 +46,8 @@ class _MyAppState extends State<MyApp> {
   _read() async {
     String colorTheme = await PreferenceSetter.readString("Dark_Mode");
 
+    await Future.delayed(const Duration(seconds: 1));
+
     setState(() {
       widget.colorTheme = colorTheme;
     });
@@ -70,8 +72,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.colorTheme);
-    widget.colorTheme ??= "Off";
+    print("dark mode: " + widget.colorTheme);
+    // widget.colorTheme ??= "Off";
     return MaterialApp(
       title: 'Health App',
       theme: widget.colorTheme == "On" ? ThemeClass.darkTheme : ThemeClass.lightTheme,

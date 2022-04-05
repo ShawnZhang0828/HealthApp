@@ -13,7 +13,7 @@ enum ButtonState { init, loading, done }
 List<String> tagsList = ['watermelon', 'apple', 'pork', 'beef', 'banana', 'cucumber', 'tomato', 'potato', 'butter', 'egg', 'garlic', 'onion', 'tofu',
   'milk', 'chicken wing', 'honey', 'lettuce', 'gingers', 'broccoli', 'celery', 'cabbages', 'asparagus', 'carrots', 'eggplant', 'mushrooms',
   'peas', 'corn', 'chicken thigh', 'bamboo shoots', 'cassava', 'leeks', 'pepper', 'pumpkin', 'radicchio', 'yam root', 'flour', 'salmon', 'steak', 'shrimps',
-  'avocado', 'beef ribs', 'chicken breast', 'crab', 'cauliflower', 'pepper', 'cilantro', 'french beans', 'lemon', 'yogurt'];
+  'avocado', 'beef ribs', 'chicken breast', 'crab', 'cauliflower', 'pepper', 'cilantro', 'french beans', 'lemon', 'yogurt', 'lobster'];
 List<String> selectedTags = [];
 
 class AllRecipeDataPasser {

@@ -148,25 +148,26 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage()))
       },
     );
-    return SafeArea(
-        child: Scaffold(
-          body: ListView(
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            children: <Widget>[
-              logo,
-              // inputEmail,
-              // inputPassword,
-              buttonLogin,
-              SizedBox(
-                height: 10,
-              ),
-              buttonSigninGoogle,
-              buttonForgotPassword,
-              buttonSignUp,
-            ],
-          ),
-        )
+    return MaterialApp(
+      theme: Theme.of(context),
+      home: Scaffold(
+        body: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          children: <Widget>[
+            logo,
+            // inputEmail,
+            // inputPassword,
+            buttonLogin,
+            const SizedBox(
+              height: 10,
+            ),
+            buttonSigninGoogle,
+            buttonForgotPassword,
+            buttonSignUp,
+          ],
+        ),
+      ),
     );
   }
 }

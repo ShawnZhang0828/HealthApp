@@ -108,7 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: widget.colorTheme == "On" ? ThemeClass.darkTheme : ThemeClass.lightTheme,
+      theme: Theme.of(context),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Log in/Sign in'),
