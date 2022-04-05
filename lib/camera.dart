@@ -102,10 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    double pageWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Classification',
-            style: TextStyle(color: Colors.white),
+        title: Text(
+          'Image Classification',
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+          ),
         ),
         iconTheme: IconThemeData(
           color: Theme.of(context).primaryColor,
@@ -120,11 +126,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: <Widget>[
+          const SizedBox(height: 30,),
           Center(
             child: _image == null
                 ? Container(
                   margin: const EdgeInsets.only(top: 35),
-                  child: Text('No image selected.',
+                  child: const Text('No image selected.',
                     style: TextStyle(fontSize: 18),),
 
             )
@@ -137,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: _imageWidget,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 36,
           ),
           Text(
@@ -157,13 +164,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: Row(
         children: <Widget>[
-          const SizedBox(width: 70,),
+          SizedBox(width: (pageWidth-140)/4,),
           FloatingActionButton( // second FAB to perform increment
             onPressed: getImage,
             tooltip: 'Pick Image',
             child: Icon(Icons.add_photo_alternate_outlined),
           ),
-          const SizedBox(width: 70,),
+          SizedBox(width: (pageWidth-140)/4,),
           FloatingActionButton( // second FAB to perform increment
             onPressed: () async {
               setState(() => state = ButtonState.loading);
@@ -219,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          const SizedBox(width: 70,),
+          SizedBox(width: (pageWidth-140)/4,),
           FloatingActionButton( // first FAB to perform decrement
             onPressed: openCamera,
             tooltip: 'take picture',

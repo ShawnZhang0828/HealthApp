@@ -85,6 +85,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
           AllRecipeReceiver.result.recipeNames = sorter.recipeNames;
           AllRecipeReceiver.result.imageURLs = sorter.imageURLs;
           AllRecipeReceiver.result.recipePageURLs = sorter.recipePageURLs;
+
           print(AllRecipeReceiver.result.recipeNames);
         } else if (preference == "Muscle Gain") {
           sorter.sortByProtein();
@@ -109,6 +110,11 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
           context,
           MaterialPageRoute(builder: (context) => SearchResultPage()),
         );
+
+        // clear the tags when switching to the next page
+        tagsList.addAll(selectedTags);
+        selectedTags.clear();
+
       },
       child: Text(
         "Submit",
@@ -184,7 +190,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
 //                return ;
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             _generateTags()
@@ -207,7 +213,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
     }
   }
   _addSuggestion(String value) {
-    final String exists = tagsList.firstWhere((text) => text ==value,orElse: () {return "NE";});
+    final String exists = tagsList.firstWhere((text) => text == value,orElse: () {return "NE";});
     if(exists != "NE") {
       final String isAlreadyInSelectedList = selectedTags.firstWhere((text) => text ==value,orElse: () {return "NE";});
       if(isAlreadyInSelectedList == "NE") {
@@ -280,7 +286,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> {
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 elevation: 0.0,
-                borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(7.0)),
     //                textColor: ,
                 textColor: Colors.white,
                 textActiveColor: Colors.white,
