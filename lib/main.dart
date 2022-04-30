@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       widget.colorTheme = colorTheme;
+      widget.colorTheme = widget.colorTheme == null ? "Off" : colorTheme;
     });
 
     widget.fav = await PreferenceSetter.readStringList("favorite");
